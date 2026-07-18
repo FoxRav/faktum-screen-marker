@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Restore
+        run: dotnet restore --locked-mode
+      - name: Build
+        run: dotnet build Faktum.ScreenMarker.slnx -c Release --no-restore
+      - name: Test
+        run: dotnet test Faktum.ScreenMarker.slnx -c Release --no-build
+      - name: Verify architecture consistency
+        run: ./scripts/verify-current-architecture.ps1
+      - name: Publish
+        run: ./scripts/publish-win-x64.ps1
+      - name: Smoke test
+        run: ./artifacts/publish/win-x64/FaktumScreenMarker.exe --smoke-test
+      - name: Platform smoke test
+        run: ./artifacts/publish/win-x64/FaktumScreenMarker.exe --platform-smoke-test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: faktum-screen-marker-win-x64
+          path: artifacts/publish/win-x64/

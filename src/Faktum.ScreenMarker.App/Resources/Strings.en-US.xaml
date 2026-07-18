@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+  <system:String x:Key="AppStartedTitle">Faktum Screen Marker</system:String>
+  <system:String x:Key="AppStartedMessage">Running in notification area. Use Ctrl+§ to toggle drawing.</system:String>
+  <system:String x:Key="TrayActivate">Activate drawing</system:String>
+  <system:String x:Key="TrayDeactivate">Deactivate drawing</system:String>
+  <system:String x:Key="TraySettings">Settings</system:String>
+  <system:String x:Key="TrayAbout">About</system:String>
+  <system:String x:Key="TrayStartup">Start with Windows</system:String>
+  <system:String x:Key="TrayExit">Exit</system:String>
+  <system:String x:Key="AboutTitle">About</system:String>
+  <system:String x:Key="AboutMessage">Faktum Screen Marker — temporary desktop annotations. No drawings are saved.</system:String>
+  <system:String x:Key="ActivationFailedTitle">Activation failed</system:String>
+  <system:String x:Key="ActivationFailed">Could not create overlay windows.</system:String>
+  <system:String x:Key="DisplayChangedTitle">Displays changed</system:String>
+  <system:String x:Key="DisplayChangedMessage">Drawing session was cleared and overlays rebuilt.</system:String>
+  <system:String x:Key="SettingsTitle">Settings</system:String>
+  <system:String x:Key="SettingsPrimaryHotkey">Primary hotkey:</system:String>
+  <system:String x:Key="SettingsFallbackHotkey">Fallback hotkey:</system:String>
+  <system:String x:Key="SettingsLanguage">Language</system:String>
+  <system:String x:Key="SettingsSave">Save</system:String>
+  <system:String x:Key="SettingsCancel">Cancel</system:String>
+  <system:String x:Key="PrimaryHotkeyFailedTitle">Primary hotkey failed</system:String>
+  <system:String x:Key="PrimaryHotkeyFailedMessage">Ctrl+§ could not be registered. Use Ctrl+Shift+F12 fallback or the tray menu.</system:String>
+  <system:String x:Key="FallbackHotkeyFailedTitle">Fallback hotkey failed</system:String>
+  <system:String x:Key="FallbackHotkeyFailedMessage">Ctrl+Shift+F12 could not be registered. Use Ctrl+§ or the tray menu.</system:String>
+  <system:String x:Key="SettingsSaveFailedTitle">Settings not saved</system:String>
+  <system:String x:Key="SettingsSaveFailedMessage">Could not write settings.json. Previous settings remain in effect.</system:String>
+  <system:String x:Key="StartupFailedTitle">Startup registration failed</system:String>
+  <system:String x:Key="StartupFailedMessage">Could not update Start with Windows setting.</system:String>
+  <system:String x:Key="DrawingCommitFailedTitle">Drawing failed</system:String>
+  <system:String x:Key="DrawingCommitFailedMessage">The last stroke could not be saved. Drawing remains available.</system:String>
+  <system:String x:Key="ToolbarShortcutReference">Session shortcuts: Q Pen, W Line, E Arrow, A Rect, S Ellipse, Z Text, X Eraser; 1–3 width; 4–9 colors.</system:String>
+  <system:String x:Key="ToolbarTextFontSize">Text font size</system:String>
+</ResourceDictionary>

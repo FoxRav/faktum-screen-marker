@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+  <system:String x:Key="AppStartedTitle">Faktum Screen Marker</system:String>
+  <system:String x:Key="AppStartedMessage">Sovellus on ilmoitusalueella. Käytä Ctrl+§ piirtotilan vaihtoon.</system:String>
+  <system:String x:Key="TrayActivate">Aktivoi piirtotila</system:String>
+  <system:String x:Key="TrayDeactivate">Poista piirtotila</system:String>
+  <system:String x:Key="TraySettings">Asetukset</system:String>
+  <system:String x:Key="TrayAbout">Tietoja</system:String>
+  <system:String x:Key="TrayStartup">Käynnistä Windowsin mukana</system:String>
+  <system:String x:Key="TrayExit">Poistu</system:String>
+  <system:String x:Key="AboutTitle">Tietoja</system:String>
+  <system:String x:Key="AboutMessage">Faktum Screen Marker — tilapäiset työpöytämerkinnät. Piirroksia ei tallenneta.</system:String>
+  <system:String x:Key="ActivationFailedTitle">Aktivointi epäonnistui</system:String>
+  <system:String x:Key="ActivationFailed">Peiteikkunoita ei voitu luoda.</system:String>
+  <system:String x:Key="DisplayChangedTitle">Näytöt muuttuivat</system:String>
+  <system:String x:Key="DisplayChangedMessage">Piirtosessio tyhjennettiin ja peitteet rakennettiin uudelleen.</system:String>
+  <system:String x:Key="SettingsTitle">Asetukset</system:String>
+  <system:String x:Key="SettingsPrimaryHotkey">Päähotkey:</system:String>
+  <system:String x:Key="SettingsFallbackHotkey">Varahotkey:</system:String>
+  <system:String x:Key="SettingsLanguage">Kieli</system:String>
+  <system:String x:Key="SettingsSave">Tallenna</system:String>
+  <system:String x:Key="SettingsCancel">Peruuta</system:String>
+  <system:String x:Key="PrimaryHotkeyFailedTitle">Päähotkey epäonnistui</system:String>
+  <system:String x:Key="PrimaryHotkeyFailedMessage">Ctrl+§-rekisteröinti epäonnistui. Käytä Ctrl+Shift+F12-varahotkeyta tai ilmoitusvalikkoa.</system:String>
+  <system:String x:Key="FallbackHotkeyFailedTitle">Varahotkey epäonnistui</system:String>
+  <system:String x:Key="FallbackHotkeyFailedMessage">Ctrl+Shift+F12-rekisteröinti epäonnistui. Käytä Ctrl+§-pikanäppäintä tai ilmoitusvalikkoa.</system:String>
+  <system:String x:Key="SettingsSaveFailedTitle">Asetuksia ei tallennettu</system:String>
+  <system:String x:Key="SettingsSaveFailedMessage">settings.json-kirjoitus epäonnistui. Aiemmat asetukset ovat voimassa.</system:String>
+  <system:String x:Key="StartupFailedTitle">Käynnistyksen rekisteröinti epäonnistui</system:String>
+  <system:String x:Key="StartupFailedMessage">Käynnistä Windowsin mukana -asetusta ei voitu päivittää.</system:String>
+  <system:String x:Key="DrawingCommitFailedTitle">Piirto epäonnistui</system:String>
+  <system:String x:Key="DrawingCommitFailedMessage">Viimeistä piirtoa ei voitu tallentaa. Piirtäminen on edelleen käytettävissä.</system:String>
+  <system:String x:Key="ToolbarShortcutReference">Sessiopikanäppäimet: Q kynä, W viiva, E nuoli, A suorakulmio, S ellipsi, Z teksti, X pyyhekumi; 1–3 paksuus; 4–9 väri.</system:String>
+  <system:String x:Key="ToolbarTextFontSize">Tekstin fonttikoko</system:String>
+</ResourceDictionary>

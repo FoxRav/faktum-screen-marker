@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Faktum.ScreenMarker.App/Faktum.ScreenMarker.App.csproj" />
+    <Project Path="src/Faktum.ScreenMarker.Core/Faktum.ScreenMarker.Core.csproj" />
+    <Project Path="src/Faktum.ScreenMarker.Platform.Windows/Faktum.ScreenMarker.Platform.Windows.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Faktum.ScreenMarker.Core.Tests/Faktum.ScreenMarker.Core.Tests.csproj" />
+    <Project Path="tests/Faktum.ScreenMarker.Platform.Windows.Tests/Faktum.ScreenMarker.Platform.Windows.Tests.csproj" />
+  </Folder>
+</Solution>
