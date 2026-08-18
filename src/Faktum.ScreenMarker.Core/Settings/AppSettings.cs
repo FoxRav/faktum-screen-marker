@@ -18,7 +18,7 @@ public sealed class AppSettings
 
     public string? LanguageOverride { get; set; }
 
-    public bool StartWithWindows { get; set; }
+    public bool StartWithWindows { get; set; } = true;
 
     public static AppSettings CreateDefault() => new();
 }

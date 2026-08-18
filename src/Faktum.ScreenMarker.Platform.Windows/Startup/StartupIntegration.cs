@@ -1,29 +1,41 @@
-using Microsoft.Win32;
-
 namespace Faktum.ScreenMarker.Platform.Windows.Startup;
 
-public static class StartupIntegration
+/// <summary>
+/// Real HKCU Run-key implementation of <see cref="IStartupIntegration"/>.
+/// </summary>
+public sealed class StartupIntegration : IStartupIntegration
 {
-    private const string RunKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
-    private const string ValueName = "FaktumScreenMarker";
+    internal const string ValueName = "FaktumScreenMarker";
 
-    public static bool IsEnabled()
+    private readonly IStartupRunKey _runKey;
+
+    public StartupIntegration() : this(null)
     {
-        using var key = Registry.CurrentUser.OpenSubKey(RunKeyPath, writable: false);
-        return key?.GetValue(ValueName) is string;
     }
 
-    public static void SetEnabled(bool enabled, string executablePath)
+    internal StartupIntegration(IStartupRunKey? runKey)
     {
-        using var key = Registry.CurrentUser.OpenSubKey(RunKeyPath, writable: true)
-                        ?? Registry.CurrentUser.CreateSubKey(RunKeyPath, writable: true);
+        _runKey = runKey ?? WindowsStartupRunKey.Current;
+    }
+
+    public void Apply(bool enabled, string executablePath)
+    {
         if (enabled)
         {
-            key.SetValue(ValueName, $"\"{executablePath}\"");
+            if (string.IsNullOrWhiteSpace(executablePath))
+            {
+                return;
+            }
+
+            var canonical = $"\"{executablePath}\"";
+            if (!string.Equals(_runKey.GetValue(ValueName), canonical, StringComparison.OrdinalIgnoreCase))
+            {
+                _runKey.SetValue(ValueName, canonical);
+            }
         }
         else
         {
-            key.DeleteValue(ValueName, throwOnMissingValue: false);
+            _runKey.DeleteValue(ValueName, throwOnMissingValue: false);
         }
     }
 }

@@ -24,6 +24,7 @@ public sealed class ApplicationHost : IDisposable
     private readonly HostInitializationCoordinator _initialization;
     private readonly TrayIconService _tray = new();
     private readonly OverlayCoordinator _overlayCoordinator = new();
+    private readonly IStartupIntegration _startup;
     private readonly DisplayTopologyCoordinator _displayTopology;
     private SettingsPersistenceCoordinator? _settingsPersistence;
 
@@ -35,8 +36,13 @@ public sealed class ApplicationHost : IDisposable
     private bool _stopped;
     private bool _disposed;
 
-    public ApplicationHost()
+    public ApplicationHost() : this(new StartupIntegration())
     {
+    }
+
+    internal ApplicationHost(IStartupIntegration startupIntegration)
+    {
+        _startup = startupIntegration;
         _lifecycle = new DrawingLifecycleOrchestrator(
             _stateCoordinator,
             ActivateDrawing,
@@ -89,18 +95,7 @@ public sealed class ApplicationHost : IDisposable
             }
         }
 
-        if (_settings.StartWithWindows)
-        {
-            try
-            {
-                StartupIntegration.SetEnabled(true, Environment.ProcessPath ?? string.Empty);
-            }
-            catch (Exception ex)
-            {
-                DiagnosticLog.Write("Startup", ex.GetType().Name);
-                _tray.ShowBalloon(AppApplication.GetString("StartupFailedTitle"), AppApplication.GetString("StartupFailedMessage"));
-            }
-        }
+        SyncStartupRegistry(_settings.StartWithWindows);
 
         _lifecycle.MarkStarted();
     }
@@ -160,20 +155,7 @@ public sealed class ApplicationHost : IDisposable
             Checked = _settings.StartWithWindows,
             CheckOnClick = true,
         };
-        startupItem.CheckedChanged += (_, _) =>
-        {
-            _settingsPersistence?.UpdateStartWithWindows(startupItem.Checked);
-            try
-            {
-                _settingsPersistence?.Flush();
-                StartupIntegration.SetEnabled(startupItem.Checked, Environment.ProcessPath ?? string.Empty);
-            }
-            catch (Exception ex)
-            {
-                DiagnosticLog.Write("Startup", ex.GetType().Name);
-                _tray.ShowBalloon(AppApplication.GetString("StartupFailedTitle"), AppApplication.GetString("StartupFailedMessage"));
-            }
-        };
+        startupItem.CheckedChanged += (_, _) => ApplyStartWithWindowsChange(startupItem.Checked);
 
         menu.Items.Add(startupItem);
         menu.Items.Add(new ToolStripSeparator());
@@ -191,10 +173,30 @@ public sealed class ApplicationHost : IDisposable
         if (window.ShowDialog() == true && window.ResultSettings is AppSettings updated)
         {
             _settingsPersistence.ApplySettings(updated);
-            _settingsPersistence.Flush();
             _settings = _settingsPersistence.Current;
             AppApplication.ApplyCulture(_settings.LanguageOverride);
+            ApplyStartWithWindowsChange(_settings.StartWithWindows);
         }
+    }
+
+    private void SyncStartupRegistry(bool enabled)
+    {
+        try
+        {
+            _startup.Apply(enabled, Environment.ProcessPath ?? string.Empty);
+        }
+        catch (Exception ex)
+        {
+            DiagnosticLog.Write("Startup", ex.GetType().Name);
+            _tray.ShowBalloon(AppApplication.GetString("StartupFailedTitle"), AppApplication.GetString("StartupFailedMessage"));
+        }
+    }
+
+    internal void ApplyStartWithWindowsChange(bool enabled)
+    {
+        _settingsPersistence?.UpdateStartWithWindows(enabled);
+        _settingsPersistence?.Flush();
+        SyncStartupRegistry(enabled);
     }
 
     private void ActivateDrawing()

@@ -13,6 +13,7 @@ using Faktum.ScreenMarker.Platform.Windows.Monitors;
 using Faktum.ScreenMarker.Platform.Windows.Native;
 using Faktum.ScreenMarker.Platform.Windows.Settings;
 using Faktum.ScreenMarker.Platform.Windows.SingleInstance;
+using Faktum.ScreenMarker.Platform.Windows.Startup;
 using Faktum.ScreenMarker.Platform.Windows.Windowing;
 
 namespace Faktum.ScreenMarker.Platform.Windows.Tests;
@@ -1205,7 +1206,7 @@ public class ApplicationHostShutdownTests
             SettingsService.UseStoreForTesting(new JsonFileSettingsStore(temp));
             try
             {
-                using var host = new ApplicationHost();
+                using var host = new ApplicationHost(new StartupIntegration(new FakeStartupRunKey()));
                 host.Start();
                 host.Stop();
                 host.Stop();
